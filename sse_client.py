@@ -5,11 +5,15 @@ class EventSourceProtocol(LineReceiver):
     def __init__(self, onConnectionLost):
         self.onConnectionLost = onConnectionLost
         self.delimiter = b'\n'
+        self.MAX_LENGTH = 1 << 20
         self.callbacks = {}
         self.finished = None
         # Initialize the event and data buffers
         self.event = b'message'
         self.data = b''
+
+    def lineLengthExceeded(self, line):
+        raise NotImplementedError('line too long')
 
     def setFinishedDeferred(self, d):
         self.finished = d
