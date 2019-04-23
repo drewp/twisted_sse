@@ -10,9 +10,11 @@ class EventSource(object):
     """
     The main EventSource class
     """
-    def __init__(self, url):
+    def __init__(self, url, userAgent):
+        # type: (str, bytes)
         self.url = url
         self.protocol = EventSourceProtocol()
+        self.userAgent = userAgent
         self.errorHandler = None
         self.stashedError = None
         self.connect()
