@@ -13,8 +13,8 @@ class EventSource(object):
     def __init__(self, url, userAgent):
         # type: (str, bytes)
         self.url = url
-        self.protocol = EventSourceProtocol()
         self.userAgent = userAgent
+        self.protocol = EventSourceProtocol(self.onConnectionLost)
         self.errorHandler = None
         self.stashedError = None
         self.connect()

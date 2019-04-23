@@ -2,7 +2,8 @@ from twisted.protocols.basic import LineReceiver
 
 
 class EventSourceProtocol(LineReceiver):
-    def __init__(self):
+    def __init__(self, onConnectionLost):
+        self.onConnectionLost = onConnectionLost
         self.delimiter = b'\n'
         self.callbacks = {}
         self.finished = None
@@ -44,8 +45,7 @@ class EventSourceProtocol(LineReceiver):
                 pass
 
     def connectionLost(self, reason):
-        if self.finished:
-            self.finished.callback(None)
+        self.onConnectionLost(reason)
 
     def dispatchEvent(self):
         """
