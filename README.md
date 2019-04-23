@@ -1,16 +1,6 @@
-Twisted SSE demo
-================
 
-A twisted web server that implements server sent events (SSE)
+This is https://github.com/juggernaut/twisted-sse-demo with some
+changes, including:
 
-To run this demo:
-
-    python sse_twisted_web.py
-    
-Open up http://localhost:12000 in your browser.
-
-To publish events:
-
-    curl -d 'data=Hello!' http://localhost:12000/publish
-    
-You should see the data you publish in your browser. That's it!
+- rename from twisted-sse-demo to twisted_sse so it can be a package
+- add setup.py so it can be depended on
